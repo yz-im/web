@@ -1,0 +1,134 @@
+<template>
+  <div class="outer">
+    <div class="container">
+      <div class="headerContent">
+        <a-input-search placeholder="搜索" style="width: 200px" />
+      </div>
+      <div class="main">
+        <div class="side">
+          <div class="side-item">
+            <div style="margin-right: 10px;">#</div>
+            <div>技术分享</div>
+          </div>
+          <div class="side-item">
+            <div style="margin-right: 10px;">#</div>
+            <div>全体</div>
+          </div>
+        </div>
+        <div class="mainContent">
+          <div class="chat-message">
+            <div class="chat-message-body" v-for="(item, index) in messageArr" :key="index">{{ item }}</div>
+          </div>
+
+          <div class="sendContent">
+            <a-input class="sendInput" v-model:value="messageContent" @keyup.enter="sendMessage" placeholder="请输入发送内容" />
+            <a-button type="primary" @click="sendMessage">Send</a-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+// 收集用户输入框的信息
+let messageContent = ref<String>('')
+// 将用户的所有输入内容整理成一个数组
+let messageArr = ref<String[]>([])
+
+// 发送信息的事件
+function sendMessage() {
+  messageArr.value.push(messageContent.value)
+  messageContent.value = ''
+}
+
+</script>
+
+<style scoped>
+.outer {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  width: 750px;
+  height: 560px;
+  border: 2px solid black;
+  position: relative;
+  background-color: #5d3d5e;
+}
+
+.headerContent {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.side {
+  height: 510px;
+  width: 150px;
+  color: #b8a5b8;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding-left: 30px;
+}
+
+.side-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.mainContent {
+  width: 596px;
+  height: 507px;
+  padding: 20px;
+  background-color: white;
+  position: relative;
+}
+
+.sendContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  bottom: 5px;
+  width: 558px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+}
+
+.sendInput {
+  margin-right: 6px;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.chat-message-sender {
+  font-weight: bold;
+}
+
+.chat-message-body {
+  margin: 5px 0;
+}
+
+.chat-message-time {
+  font-size: 12px;
+  color: #666;
+}
+</style>
