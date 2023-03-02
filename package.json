@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "ant-design-vue": "^3.2.15",
-    "vue": "^3.2.45"
     "vue": "^3.2.45",
+    "websocket": "^1.0.34",
     "yzim": "^0.0.10"
   },
   "devDependencies": {
